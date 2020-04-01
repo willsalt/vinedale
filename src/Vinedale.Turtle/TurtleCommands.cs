@@ -4,6 +4,7 @@ using Logo.Procedures;
 using Logo.Tokens;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Vinedale.Turtle.Drawing;
 using Vinedale.Turtle.Interfaces;
 using Vinedale.Turtle.Resources;
@@ -53,6 +54,7 @@ namespace Vinedale.Turtle
                 new LogoCommand("ycor", 0, RedefinabilityType.NonRedefinable, GetYCoordinate, Strings.CommandYcorHelpText),
                 new LogoCommand("setpensize", 1, RedefinabilityType.NonRedefinable, SetPenSize, Strings.CommandSetPenSizeHelpText, Strings.CommandSetPenSizeExampleText),
                 new LogoCommand("pensize", 0, RedefinabilityType.NonRedefinable, GetPenSize, Strings.CommandPenSizeHelpText),
+                new LogoCommand(Syntax.SetposCmd, 1, RedefinabilityType.NonRedefinable, SetPos, Strings.CommandSetposHelpText, Strings.CommandSetposExampleText),
             };
         }
 
@@ -241,6 +243,35 @@ namespace Vinedale.Turtle
         public Token SetHeading(InterpretorContext context, params LogoValue[] input)
         {
             SetXY(context, input, Strings.CommandSetHWrongTypeError, BuildSetHeadingInstruction);
+            return null;
+        }
+
+        /// <summary>
+        /// Move the turtle to an absolute position.
+        /// </summary>
+        /// <param name="context">The interpretor context.</param>
+        /// <param name="input">Should contain a list with two elements, the X and Y coordinates to move the turtle to.</param>
+        /// <returns><c>null</c>.</returns>
+        public Token SetPos(InterpretorContext context, params LogoValue[] input)
+        {
+            if (context is null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+            if (!(input[0].Value is ListToken inputList))
+            {
+                context.Interpretor.WriteOutputLine(Strings.CommandSetposWrongTypeError);
+                return null;
+            }
+            ListToken copiedList = new ListToken(inputList.Contents);
+            context.Interpretor.EvaluateListContents(copiedList, true);
+            if (copiedList.Contents.Count < 2 || !copiedList.Contents.Take(2).All(t => t is ValueToken vt && vt.Value.Type == LogoValueType.Number))
+            {
+                context.Interpretor.WriteOutputLine(Strings.CommandSetposWrongTypeError);
+                return null;
+            }
+            _parentContext.PendDrawingInstruction(
+                new JumpToInstruction(GetDouble((copiedList.Contents[0] as ValueToken).Value), GetDouble((copiedList.Contents[1] as ValueToken).Value), null));
             return null;
         }
 

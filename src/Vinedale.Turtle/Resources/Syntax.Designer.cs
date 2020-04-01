@@ -88,6 +88,15 @@ namespace Vinedale.Turtle.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to setpos.
+        /// </summary>
+        internal static string SetposCmd {
+            get {
+                return ResourceManager.GetString("SetposCmd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to xcor.
         /// </summary>
         internal static string XCorCmd {

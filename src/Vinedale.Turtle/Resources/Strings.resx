@@ -195,6 +195,15 @@
   <data name="CommandSetPenSizeWrongTypeError" xml:space="preserve">
     <value>The pen size must be a number.</value>
   </data>
+  <data name="CommandSetposExampleText" xml:space="preserve">
+    <value>[X Y]</value>
+  </data>
+  <data name="CommandSetposHelpText" xml:space="preserve">
+    <value>Make the turtle jump to the given position</value>
+  </data>
+  <data name="CommandSetposWrongTypeError" xml:space="preserve">
+    <value>I can only make the turtle jump if you give me a list of two numbers.</value>
+  </data>
   <data name="CommandSetXExampleText" xml:space="preserve">
     <value>X</value>
   </data>

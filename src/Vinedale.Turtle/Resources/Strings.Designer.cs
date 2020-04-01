@@ -295,6 +295,33 @@ namespace Vinedale.Turtle.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to [X Y].
+        /// </summary>
+        internal static string CommandSetposExampleText {
+            get {
+                return ResourceManager.GetString("CommandSetposExampleText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Make the turtle jump to the given position.
+        /// </summary>
+        internal static string CommandSetposHelpText {
+            get {
+                return ResourceManager.GetString("CommandSetposHelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I can only make the turtle jump if you give me a list of two numbers..
+        /// </summary>
+        internal static string CommandSetposWrongTypeError {
+            get {
+                return ResourceManager.GetString("CommandSetposWrongTypeError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to X.
         /// </summary>
         internal static string CommandSetXExampleText {
